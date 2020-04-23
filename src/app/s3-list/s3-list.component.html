@@ -1,0 +1,27 @@
+<body>
+    <h2> Your S3 Tree View </h2>
+
+    <ul id="myUL">
+        <div *ngIf="treeView">
+            <li> <span class="caret"> {{treeView.parentBucket}} </span>
+                <ul class="nested">
+                    <div *ngFor="let record of treeView.keys">
+                        <li> {{record.key}} </li>
+                    </div>
+                    <div *ngIf="treeView.otherBuckets">
+                        <div *ngFor="let directory of treeView.otherBuckets | keyvalue">
+                            <li> <span class="caret"> {{directory.key}} - {{directory.value.keys}} </span>
+                                <ul class="nested">
+                                    <div *ngFor="let innerDir of directory.value.keys">
+                                        <li> {{innerDir.key}} </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        </div>
+                    </div>
+                </ul>
+            </li>
+        </div>
+    </ul>
+
+</body>
